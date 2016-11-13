@@ -1,0 +1,1 @@
+void func_for_go_plugin_to_find_at_dlopen_time(void);
