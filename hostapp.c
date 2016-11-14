@@ -14,7 +14,11 @@ static void check_dl_error(void * value) {
 }
 
 int main(int argc, char * argv[]) {
-	void * plugin_handle = dlopen("./plugin", RTLD_LAZY);
+	const char * pluginname = "./plugin";
+	if (argc > 1) {
+		pluginname = argv[1];
+	}
+	void * plugin_handle = dlopen(pluginname, RTLD_LAZY);
 	check_dl_error(plugin_handle);
 	plugged_in_func_t plugged_in_func = dlsym(plugin_handle, "GoFunction");
 	check_dl_error(plugin_handle);
