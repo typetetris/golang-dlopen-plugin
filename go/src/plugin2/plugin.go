@@ -1,6 +1,7 @@
 package main
 
-//#include "hostapp-for-plugins.h"
+//#cgo LDFLAGS: -Wl,--warn-unresolved-symbols
+//#include "hostapp.h"
 import "C"
 
 import "fmt"
