@@ -10,17 +10,17 @@ envtest:
 simpleplugin: ${GOPATH}/src/simpleplugin/simpleplugin.go
 	go build -buildmode=c-shared simpleplugin
 
-plugin: ${GOPATH}/src/plugin/plugin.go ${GOPATH}/src/plugin/hostapp-for-plugins.h
+demoplugin-weak-symbols: ${GOPATH}/src/demoplugin-weak-symbols/plugin.go ${GOPATH}/src/demoplugin-weak-symbols/hostapp-for-plugins.h
 	go build -buildmode=c-shared $@
 
-plugin1: ${GOPATH}/src/plugin1/plugin.go hostapp.h
+demoplugin-ignore-all: ${GOPATH}/src/demoplugin-ignore-all/plugin.go hostapp.h
 	go build -buildmode=c-shared $@
 
-plugin2: ${GOPATH}/src/plugin2/plugin.go hostapp.h
+demoplugin-warn-unresolved-symbols: ${GOPATH}/src/demoplugin-warn-unresolved-symbols/plugin.go hostapp.h
 	go build -buildmode=c-shared $@
 
-test: hostapp simpleplugin plugin plugin1 plugin2
+test: hostapp simpleplugin demoplugin-weak-symbols demoplugin-ignore-all demoplugin-warn-unresolved-symbols
 	./hostapp ./simpleplugin
-	./hostapp ./plugin
-	./hostapp ./plugin1
-	./hostapp ./plugin2
+	./hostapp ./demoplugin-weak-symbols
+	./hostapp ./demoplugin-ignore-all
+	./hostapp ./demoplugin-warn-unresolved-symbols
